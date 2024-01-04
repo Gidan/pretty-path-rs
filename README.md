@@ -5,3 +5,16 @@ Small utility to print all the paths listed in the PATH variable in a more reada
 ```
 cargo run
 ```
+
+## Usage
+```
+Usage: path [SEARCH]
+
+Arguments:
+  [SEARCH]  
+
+Options:
+  -h, --help     Print help
+  -V, --version  Print version
+```
+
