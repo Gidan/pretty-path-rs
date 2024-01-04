@@ -18,3 +18,7 @@ Options:
   -V, --version  Print version
 ```
 
+## Features
+[x] - print each path line by line
+[x] - search and highlight specified word
+[ ] - windows system compatibility
