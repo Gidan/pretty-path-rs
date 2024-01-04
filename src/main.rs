@@ -1,26 +1,33 @@
 use std::env;
 use colored::Colorize;
+use clap::Parser;
 
-fn main() {
-    println!("Hello {}", "World".bright_yellow().bold());
-    match env::var("PATH") {
-        Ok(val) => pretty_print(&val),
-        Err(e) => println!("couldn't interpret: {e}"),
-    }
-    
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None)]
+struct Args {
+    #[arg(index = 1)]
+    search: Option<String>,
 }
 
-fn pretty_print(val : &str) {
-    let args: Vec<String> = env::args().collect();
-    let mut toPrint : &str = val;
-    if args.len() > 1 {
-        let search = &args[1].as_str();
-        let highlighted = search.red().to_string();
-        let whole = toPrint.replace(search, highlighted.as_str());
-        toPrint = whole.as_str();
-        println!("{}", toPrint.replace(":", "\n"));
-    } else {
-        println!("{}", toPrint.replace(":", "\n"));
-    }
+fn main() {
+    let args = Args::parse();
 
+    match env::var("PATH") {
+        Ok(val) => pretty_print(&val, &args),
+        Err(e) => println!("couldn't interpret: {e}"),
+    }
+}
+
+fn pretty_print(val : &str, args : &Args) {
+    let mut to_print : &str = val;
+    let search = &args.search;
+    if search.is_some() {
+        let search_val = search.as_ref().unwrap();
+        let highlighted = search_val.red().to_string();
+        let whole = to_print.replace(search_val.as_str(), highlighted.as_str());
+        to_print = &whole.as_str();
+        println!("{}", to_print.replace(":", "\n"));
+    } else {
+        println!("{}", to_print.replace(":", "\n"));
+    }
 }
