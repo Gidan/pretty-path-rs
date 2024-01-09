@@ -22,7 +22,7 @@ Options:
 ```
 
 ## Features
-[x] - print each path line by line  
-[x] - search and highlight specified word  
+[ :heavy_check_mark: ] - print each path line by line  
+[ :heavy_check_mark: ] - search and highlight specified word  
 [ ] - windows system compatibility  
 
